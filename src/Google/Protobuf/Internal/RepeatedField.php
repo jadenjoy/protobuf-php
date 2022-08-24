@@ -121,7 +121,7 @@ class RepeatedField implements \ArrayAccess, \IteratorAggregate, \Countable
      * @throws \ErrorException Invalid type for index.
      * @throws \ErrorException Non-existing index.
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->container[$offset];
     }
@@ -138,7 +138,7 @@ class RepeatedField implements \ArrayAccess, \IteratorAggregate, \Countable
      * @throws \ErrorException Non-existing index.
      * @throws \ErrorException Incorrect type of the element.
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         switch ($this->type) {
             case GPBType::SFIXED32:
@@ -210,7 +210,7 @@ class RepeatedField implements \ArrayAccess, \IteratorAggregate, \Countable
      * @throws \ErrorException The element to be removed is not at the end of the
      * RepeatedField.
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $count = count($this->container);
         if (!is_numeric($offset) || $count === 0 || $offset !== $count - 1) {
@@ -231,7 +231,7 @@ class RepeatedField implements \ArrayAccess, \IteratorAggregate, \Countable
      * @return bool True if the element at the given offset exists.
      * @throws \ErrorException Invalid type for index.
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -239,7 +239,7 @@ class RepeatedField implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * @ignore
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new RepeatedFieldIter($this->container);
     }
@@ -251,7 +251,7 @@ class RepeatedField implements \ArrayAccess, \IteratorAggregate, \Countable
      *
      * @return integer The number of stored elements.
      */
-    public function count()
+    public function count(): int
     {
         return count($this->container);
     }
